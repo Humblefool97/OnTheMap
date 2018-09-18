@@ -250,6 +250,42 @@
             </objects>
             <point key="canvasLocation" x="2920.8000000000002" y="-113.79310344827587"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="Ass-Ax-cIY">
+            <objects>
+                <viewController id="NBI-lf-lSg" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hBl-gr-8cZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8lx-vD-LnZ">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem id="FKZ-h9-y4v">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="Cme-1M-u6m"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rl9-gS-YvP">
+                                <rect key="frame" x="128" y="157" width="64" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="W35-QB-lY9"/>
+                                    <constraint firstAttribute="width" constant="64" id="ft4-di-2Dg"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Rl9-gS-YvP" firstAttribute="centerX" secondItem="hBl-gr-8cZ" secondAttribute="centerX" id="G7C-ge-YAO"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="SDp-Vh-Woh"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fgQ-qJ-x8C" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3968" y="183"/>
+        </scene>
     </scenes>
     <resources>
         <image name="icon_addpin" width="24" height="24"/>

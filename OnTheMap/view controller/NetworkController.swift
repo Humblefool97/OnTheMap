@@ -12,8 +12,12 @@ import UIKit
 class NetworkController:NSObject {
     // shared session
     var session = URLSession.shared
-    
-    func  fireNetworkCall ( isPost:Bool,isAuthRequest:Bool = false,_ method:String , parameters: [String:AnyObject] = [:], jsonObject:[String:AnyObject]?,completionHandler: @escaping ( _ result: AnyObject?, _ error:NSError?) -> Void) -> Void {
+    enum httpMethods:String{
+        case GET
+        case POST
+        case PUT
+    }
+    func  fireNetworkCall ( httpMethod:httpMethods,isAuthRequest:Bool = false,_ method:String , parameters: [String:AnyObject] = [:], jsonObject:[String:AnyObject]?,completionHandler: @escaping ( _ result: AnyObject?, _ error:NSError?) -> Void) -> Void {
         /* 1. Set the parameters */
         
         /* 2/3. Build the URL, Configure the request */
@@ -27,15 +31,18 @@ class NetworkController:NSObject {
         request.addValue(NetworkController.Constants.VALUE_CONTENT_TYPE, forHTTPHeaderField: NetworkController.Constants.CONTENT_TYPE)
         request.addValue(NetworkController.Constants.VALUE_API_KEY, forHTTPHeaderField: NetworkController.Constants.KEY_API_KEY)
         request.addValue(NetworkController.Constants.VALUE_APP_ID, forHTTPHeaderField: NetworkController.Constants.KEY_APP_ID)
-
-        if(isPost){
+        switch httpMethod {
+        case httpMethods.GET:
+            request.httpMethod = "GET"
+        case httpMethods.POST:
             request.httpMethod = "POST"
+        case httpMethods.PUT:
+            request.httpMethod = "PUT"
+        }
+        if(httpMethod == httpMethods.POST || httpMethod == httpMethods.PUT){
             let jsonData = try? JSONSerialization.data(withJSONObject: jsonObject!, options:[])
             request.httpBody = jsonData
-        }else{
-            request.httpMethod = "GET"
         }
-        
         print(request)
         
         /* 4. Make the request */
@@ -73,7 +80,7 @@ class NetworkController:NSObject {
     
     // given raw JSON, return a usable Foundation object
     private func convertDataWithCompletionHandler(_ data: Data,isAuthRequest:Bool,completionHandlerForConvertData: (_ result: AnyObject?, _ error: NSError?) -> Void) {
-         var newData = data
+        var newData = data
         if(isAuthRequest){
             let range = Range(5..<data.count)
             newData = data.subdata(in: range)

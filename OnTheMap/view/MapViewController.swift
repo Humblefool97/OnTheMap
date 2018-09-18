@@ -44,6 +44,7 @@ class MapViewController: UIViewController, MKMapViewDelegate{
                         appDelegate?.studentTagsList = studentTags
                         self.mapView.addAnnotations(annotations)
                         UIViewController.removeLoader(view:loadingIndicator)
+                        self.checkStudentLocation()
                     }
                 }
                 
@@ -54,7 +55,33 @@ class MapViewController: UIViewController, MKMapViewDelegate{
                 }
             }
         }
-    } // MARK: - MKMapViewDelegate
+    }
+    
+    func checkStudentLocation(){
+        let loadingIndicator = UIViewController.displayLoadingIndicator(view: self.view)
+        NetworkController.init().instance().getStudent(uniqueKey:  UserSession.instance.accountKey!){
+            (isSuccess,isStudentLocationExists,errorString) in
+            if(isSuccess){
+                //Display dialog
+                performUIUpdatesOnMain {
+                    if(isStudentLocationExists){
+                        print("Student Record already exists")
+                        UserSession.instance.doesUserExist = true
+                    }else{
+                        print("Student Record doesn't exists")
+                    }
+                }
+                
+            }else{
+                //Display VC to add location
+            }
+            performUIUpdatesOnMain {
+                UIViewController.removeLoader(view:loadingIndicator)
+            }
+        }
+    }
+    
+    // MARK: - MKMapViewDelegate
     
     // Here we create a view with a "right callout accessory view". You might choose to look into other
     // decoration alternatives. Notice the similarity between this method and the cellForRowAtIndexPath

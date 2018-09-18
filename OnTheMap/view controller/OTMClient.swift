@@ -10,11 +10,18 @@ import Foundation
 import MapKit
 
 extension NetworkController {
-    
-    func login(userName:String , password:String, completionHandlerForSession: @escaping (_ success: Bool, _ sessionID: String?, _ accountKey:String?,_ errorString: String?) -> Void) -> Void {
+    /**
+     * Login using username & passowrd
+     *
+     */
+    func login(
+        userName:String,
+        password:String,
+        completionHandlerForSession: @escaping (_ success: Bool, _ sessionID: String?, _ accountKey:String?,
+        _ errorString: String?) -> Void) -> Void {
         
         let jsonBody =  ["udacity":["username":userName,"password":password]]
-        let _ = fireNetworkCall(isPost: true, isAuthRequest: true, "", jsonObject: jsonBody as [String : AnyObject]){(result, error) in
+        let _ = fireNetworkCall(httpMethod:httpMethods.POST, isAuthRequest: true, "", jsonObject: jsonBody as [String : AnyObject]){(result, error) in
             /* 3. Send the desired value(s) to completion handler */
             if let error = error {
                 print(error)
@@ -34,11 +41,17 @@ extension NetworkController {
             }
         }
     }
-    
-    func getStudents(completionHandlerForStudents : @escaping (_ success:Bool, _ studentTags:[StudentTags]?, _ errorString:String?) ->  Void) -> Void{
+    /**
+     * Gets list of students
+     *
+     */
+    func getStudents(
+        completionHandlerForStudents : @escaping (_ success:Bool,
+        _ studentTags:[StudentTags]?,
+        _ errorString:String?) ->  Void) -> Void{
         
-        let parameters:[String:Any] = ["limit":100]
-        let _ = fireNetworkCall(isPost: false,isAuthRequest: false,"/StudentLocation",parameters: parameters as [String : AnyObject], jsonObject: nil){(result,error) in
+        let parameters:[String:Any] = [:]
+        let _ = fireNetworkCall(httpMethod:httpMethods.GET,isAuthRequest: false,"/StudentLocation",parameters: parameters as [String : AnyObject], jsonObject: nil){(result,error) in
             if let error = error {
                 print(error)
                 completionHandlerForStudents(false,nil,error.description)
@@ -69,7 +82,6 @@ extension NetworkController {
                                 studentTag.mediaUrl = mediaURL as! String
                                 isValidCell = true
                             }
-                            
                             if let lat = (dictionary["latitude"]), let long = (dictionary["longitude"]){
                                 let latInDouble = lat as! Double
                                 let longInDouble = long as! Double
@@ -88,6 +100,32 @@ extension NetworkController {
                 }
             }
         }
-        
     }
+    
+    /**
+     * Checks if the student's location has already
+     *  been logged or not
+     *
+     */
+    func getStudent(
+        uniqueKey:String,
+        completionHandlerForStudent : @escaping (_ success:Bool,
+        _ isLocationExists:Bool,
+        _ errorString:String?) ->  Void) -> Void{
+        
+        let paramter = [NetworkController.Constants.WHERE:"{\"uniqueKey\":\"\(uniqueKey)\"}"]
+        let _ = fireNetworkCall(httpMethod:httpMethods.GET, isAuthRequest: false, "/StudentLocation", parameters: paramter as [String:AnyObject], jsonObject: nil){
+            (result,error) in
+            if let error = error {
+                completionHandlerForStudent(false,false,error.description)
+            }else{
+                if let json = result as? [String:Any]{
+                    if let studentList = json["results"] as? [[String:Any]]{
+                        completionHandlerForStudent(true,!studentList.isEmpty,"")
+                    }
+                }
+            }
+        }
+    }
+    
 }
