@@ -67,13 +67,22 @@ class BaseViewController:UIViewController{
                         print("Student Record doesn't exists")
                     }
                 }
-                
             }else{
                 //Display VC to add location
             }
             performUIUpdatesOnMain {
                 UIViewController.removeLoader(view:loadingIndicator)
             }
+        }
+    }
+    
+    func addLocation(){
+        if(UserSession.instance.doesUserExist){
+            let alert = UIAlertController(title: "Overwrite?", message: "User location already exists.Do you want to overwrite it?", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil))
+            alert.addAction(UIAlertAction(title: "Overwrite", style: UIAlertActionStyle.default){ action in
+            })
+            self.present(alert, animated: true, completion: nil)
         }
     }
     

@@ -13,7 +13,11 @@ class TagListViewController:BaseViewController,UITableViewDelegate,UITableViewDa
     let appDelegate:AppDelegate = (UIApplication.shared.delegate as! AppDelegate)
     
     @IBOutlet var studentListTableView: UITableView!
+    @IBAction func onAddLocation(_ sender: Any) {
+        addLocation()
+    }
     
+    //MARK:- System Callbacks
     override func viewWillAppear(_ animated: Bool) {
         print("viewWillAppear")
         setDataCompletionListener(dataCompletionListener: self)
@@ -24,10 +28,10 @@ class TagListViewController:BaseViewController,UITableViewDelegate,UITableViewDa
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        studentListTableView.delegate = self
+        studentListTableView.delegate = self 
         studentListTableView.dataSource = self
     }
-    
+    //MARK:- Tableview delegates
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return appDelegate.studentTagsList.count
     }
@@ -40,16 +44,22 @@ class TagListViewController:BaseViewController,UITableViewDelegate,UITableViewDa
         return tableViewCell!
     }
     
+    //MARK:- Dataload callbacks
     func onDataLoadSuccess(studentList: [StudentTags]?) {
         if let studentList = studentList{
-            appDelegate.studentTagsList = studentList
-            studentListTableView.reloadData()
+            performUIUpdatesOnMain {
+                self.appDelegate.studentTagsList = studentList
+                self.studentListTableView.reloadData()
+            }
         }
     }
     
     func onDataLoadFailure(errorString: String?) {
         displayErrorMessage(errorString)
     }
+    
+
+    
     
     /*
      // MARK: - Navigation

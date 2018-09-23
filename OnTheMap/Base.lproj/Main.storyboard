@@ -140,7 +140,7 @@
                                 <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6IM-6M-vEF" id="72V-6a-mb4">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_pin" translatesAutoresizingMaskIntoConstraints="NO" id="lhM-WB-js2">
@@ -185,7 +185,11 @@
                     <navigationItem key="navigationItem" title="On the Map" id="aKB-bd-f85">
                         <barButtonItem key="leftBarButtonItem" title="LOGOUT" id="6zZ-Dr-gx9"/>
                         <rightBarButtonItems>
-                            <barButtonItem title="Item" image="icon_addpin" id="rA1-cf-qzk"/>
+                            <barButtonItem title="Item" image="icon_addpin" id="rA1-cf-qzk">
+                                <connections>
+                                    <action selector="onAddLocation:" destination="tHe-ws-n4M" id="DdE-mm-S7C"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem title="Item" image="icon_refresh" id="na0-Ux-NPb"/>
                         </rightBarButtonItems>
                     </navigationItem>
@@ -241,7 +245,11 @@
                     <navigationItem key="navigationItem" title="On the Map" id="Nsd-br-2vk">
                         <barButtonItem key="leftBarButtonItem" title="LOGOUT" id="VUf-am-7Fa"/>
                         <rightBarButtonItems>
-                            <barButtonItem title="Item" image="icon_addpin" id="ESA-7d-S7m"/>
+                            <barButtonItem title="Item" image="icon_addpin" id="ESA-7d-S7m">
+                                <connections>
+                                    <action selector="onAddLocationClicked:" destination="sdd-l4-Ka5" id="wdE-PH-LGS"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem title="Item" image="icon_refresh" id="3gY-Ik-Ieu"/>
                         </rightBarButtonItems>
                     </navigationItem>

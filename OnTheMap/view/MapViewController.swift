@@ -20,6 +20,9 @@ class MapViewController: BaseViewController, MKMapViewDelegate,DataCompletionLis
         print("viewWillDisappear")
         setDataCompletionListener(dataCompletionListener: nil)
     }
+    @IBAction func onAddLocationClicked(_ sender: Any) {
+        addLocation()
+    }
     
     // MARK: - MKMapViewDelegate
     
@@ -65,7 +68,6 @@ class MapViewController: BaseViewController, MKMapViewDelegate,DataCompletionLis
                 annotation.coordinate = tag.coordinate
                 annotation.title = "\(tag.firstName) \(tag.lastName)"
                 annotation.subtitle = tag.mediaUrl
-                
                 // Finally we place the annotation in an array of annotations.
                 annotations.append(annotation)
             }
