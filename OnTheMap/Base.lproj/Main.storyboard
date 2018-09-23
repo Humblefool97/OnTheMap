@@ -140,7 +140,7 @@
                                 <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6IM-6M-vEF" id="72V-6a-mb4">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_pin" translatesAutoresizingMaskIntoConstraints="NO" id="lhM-WB-js2">
@@ -189,6 +189,9 @@
                             <barButtonItem title="Item" image="icon_refresh" id="na0-Ux-NPb"/>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="studentListTableView" destination="zah-mh-tij" id="Fii-mk-Zcz"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GiT-8j-0kN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -258,16 +261,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8lx-vD-LnZ">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8lx-vD-LnZ">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem id="FKZ-h9-y4v">
                                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="Cme-1M-u6m"/>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rl9-gS-YvP">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Rl9-gS-YvP">
                                 <rect key="frame" x="128" y="157" width="64" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="W35-QB-lY9"/>
@@ -277,7 +279,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="SDp-Vh-Woh" firstAttribute="bottom" secondItem="Rl9-gS-YvP" secondAttribute="bottom" constant="347" id="5MH-I8-xHW"/>
                             <constraint firstItem="Rl9-gS-YvP" firstAttribute="centerX" secondItem="hBl-gr-8cZ" secondAttribute="centerX" id="G7C-ge-YAO"/>
+                            <constraint firstItem="8lx-vD-LnZ" firstAttribute="leading" secondItem="hBl-gr-8cZ" secondAttribute="leading" id="RZt-en-9AA"/>
+                            <constraint firstItem="8lx-vD-LnZ" firstAttribute="top" secondItem="hBl-gr-8cZ" secondAttribute="top" id="ZTd-wd-fiE"/>
+                            <constraint firstItem="Rl9-gS-YvP" firstAttribute="centerX" secondItem="8lx-vD-LnZ" secondAttribute="centerX" id="mcP-4X-gsg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="SDp-Vh-Woh"/>
                     </view>

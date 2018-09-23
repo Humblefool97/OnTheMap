@@ -9,76 +9,16 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, MKMapViewDelegate{
-    
+class MapViewController: BaseViewController, MKMapViewDelegate,DataCompletionListener{
     @IBOutlet weak var mapView: MKMapView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        //1.Make an API Call
-        fireStudentLocationsCall()
-        
-        //2.In the call back, parse through the list & create annotation
-        //3.Add annotation to the annotationList
+    override func viewWillAppear(_ animated: Bool) {
+        print("viewWillAppear")
+        setDataCompletionListener(dataCompletionListener: self)
     }
-    
-    func fireStudentLocationsCall(){
-        let loadingIndicator = UIViewController.displayLoadingIndicator(view: self.view)
-        NetworkController.init().instance().getStudents { (isSuccess, studentTags, errorString) in
-            if(isSuccess){
-                var annotations = [MKPointAnnotation]()
-                if let studentTags = studentTags{
-                    for tag in studentTags {
-                        // Here we create the annotation and set its coordiate, title, and subtitle properties
-                        let annotation = MKPointAnnotation()
-                        annotation.coordinate = tag.coordinate
-                        annotation.title = "\(tag.firstName) \(tag.lastName)"
-                        annotation.subtitle = tag.mediaUrl
-                        
-                        // Finally we place the annotation in an array of annotations.
-                        annotations.append(annotation)
-                    }
-                    performUIUpdatesOnMain {
-                        let delegate = UIApplication.shared.delegate
-                        let appDelegate = delegate as? AppDelegate
-                        appDelegate?.studentTagsList = studentTags
-                        self.mapView.addAnnotations(annotations)
-                        UIViewController.removeLoader(view:loadingIndicator)
-                        self.checkStudentLocation()
-                    }
-                }
-                
-            }else{
-                performUIUpdatesOnMain {
-                    self.displayErrorMessage(errorString)
-                    UIViewController.removeLoader(view:loadingIndicator)
-                }
-            }
-        }
-    }
-    
-    func checkStudentLocation(){
-        let loadingIndicator = UIViewController.displayLoadingIndicator(view: self.view)
-        NetworkController.init().instance().getStudent(uniqueKey:  UserSession.instance.accountKey!){
-            (isSuccess,isStudentLocationExists,errorString) in
-            if(isSuccess){
-                //Display dialog
-                performUIUpdatesOnMain {
-                    if(isStudentLocationExists){
-                        print("Student Record already exists")
-                        UserSession.instance.doesUserExist = true
-                    }else{
-                        print("Student Record doesn't exists")
-                    }
-                }
-                
-            }else{
-                //Display VC to add location
-            }
-            performUIUpdatesOnMain {
-                UIViewController.removeLoader(view:loadingIndicator)
-            }
-        }
+    override func viewWillDisappear(_ animated: Bool) {
+        print("viewWillDisappear")
+        setDataCompletionListener(dataCompletionListener: nil)
     }
     
     // MARK: - MKMapViewDelegate
@@ -116,13 +56,30 @@ class MapViewController: UIViewController, MKMapViewDelegate{
             }
         }
     }
+    func onDataLoadSuccess(studentList: [StudentTags]?) {
+        var annotations = [MKPointAnnotation]()
+        if let studentTags = studentList{
+            for tag in studentTags {
+                // Here we create the annotation and set its coordiate, title, and subtitle properties
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = tag.coordinate
+                annotation.title = "\(tag.firstName) \(tag.lastName)"
+                annotation.subtitle = tag.mediaUrl
+                
+                // Finally we place the annotation in an array of annotations.
+                annotations.append(annotation)
+            }
+            performUIUpdatesOnMain {
+                self.mapView.addAnnotations(annotations)
+            }
+        }
+    }
     
-    
-    
-    fileprivate func displayErrorMessage(_ errorMessage:String?) {
-        let alert = UIAlertController(title: nil, message: errorMessage, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+    func onDataLoadFailure(errorString: String?) {
+        //Display error message
+        performUIUpdatesOnMain {
+            self.displayErrorMessage(errorString)
+        }
     }
     /*
      // MARK: - Navigation

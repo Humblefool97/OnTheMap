@@ -25,6 +25,7 @@
 		B871A876213DA2D3004E4600 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B871A875213DA2D3004E4600 /* MapViewController.swift */; };
 		B871A878213DA306004E4600 /* TagListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B871A877213DA306004E4600 /* TagListViewController.swift */; };
 		B8885AD52133169400095176 /* OTMClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8885AD42133169400095176 /* OTMClient.swift */; };
+		B8E0944A21577CA7006AD57C /* DataCompletionListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E0944921577CA7006AD57C /* DataCompletionListener.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		B871A875213DA2D3004E4600 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		B871A877213DA306004E4600 /* TagListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListViewController.swift; sourceTree = "<group>"; };
 		B8885AD42133169400095176 /* OTMClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMClient.swift; sourceTree = "<group>"; };
+		B8E0944921577CA7006AD57C /* DataCompletionListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCompletionListener.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 		B82389592129A5CD00E7A7A9 /* OnTheMap */ = {
 			isa = PBXGroup;
 			children = (
+				B8E0944821577C90006AD57C /* protocol */,
 				B8885AD621331A1C00095176 /* model */,
 				B82389892129D84900E7A7A9 /* view controller */,
 				B82389882129CF0600E7A7A9 /* view */,
@@ -180,6 +183,14 @@
 				B827751E213EF37F0029A788 /* StudentTags.swift */,
 			);
 			path = model;
+			sourceTree = "<group>";
+		};
+		B8E0944821577C90006AD57C /* protocol */ = {
+			isa = PBXGroup;
+			children = (
+				B8E0944921577CA7006AD57C /* DataCompletionListener.swift */,
+			);
+			path = protocol;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -327,6 +338,7 @@
 				B8885AD52133169400095176 /* OTMClient.swift in Sources */,
 				B871A878213DA306004E4600 /* TagListViewController.swift in Sources */,
 				B82389912129E6B700E7A7A9 /* GCDBlackBox.swift in Sources */,
+				B8E0944A21577CA7006AD57C /* DataCompletionListener.swift in Sources */,
 				B823895B2129A5CD00E7A7A9 /* AppDelegate.swift in Sources */,
 				B81E82182145774D009CEA4E /* TagListViewCell.swift in Sources */,
 			);
