@@ -22,6 +22,8 @@
 		B823898F2129E41B00E7A7A9 /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823898E2129E41B00E7A7A9 /* NetworkConstants.swift */; };
 		B82389912129E6B700E7A7A9 /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82389902129E6B700E7A7A9 /* GCDBlackBox.swift */; };
 		B827751F213EF37F0029A788 /* StudentTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = B827751E213EF37F0029A788 /* StudentTags.swift */; };
+		B82D340C216680650091CF96 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82D340B216680650091CF96 /* AddLocationViewController.swift */; };
+		B82D340E2166808F0091CF96 /* ConfirmLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82D340D2166808F0091CF96 /* ConfirmLocationViewController.swift */; };
 		B871A876213DA2D3004E4600 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B871A875213DA2D3004E4600 /* MapViewController.swift */; };
 		B871A878213DA306004E4600 /* TagListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B871A877213DA306004E4600 /* TagListViewController.swift */; };
 		B8885AD52133169400095176 /* OTMClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8885AD42133169400095176 /* OTMClient.swift */; };
@@ -67,6 +69,8 @@
 		B823898E2129E41B00E7A7A9 /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
 		B82389902129E6B700E7A7A9 /* GCDBlackBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
 		B827751E213EF37F0029A788 /* StudentTags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentTags.swift; sourceTree = "<group>"; };
+		B82D340B216680650091CF96 /* AddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
+		B82D340D2166808F0091CF96 /* ConfirmLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmLocationViewController.swift; sourceTree = "<group>"; };
 		B871A875213DA2D3004E4600 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		B871A877213DA306004E4600 /* TagListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListViewController.swift; sourceTree = "<group>"; };
 		B8885AD42133169400095176 /* OTMClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMClient.swift; sourceTree = "<group>"; };
@@ -162,6 +166,8 @@
 				B871A877213DA306004E4600 /* TagListViewController.swift */,
 				B81E82172145774D009CEA4E /* TagListViewCell.swift */,
 				B81E821921458579009CEA4E /* BaseViewController.swift */,
+				B82D340B216680650091CF96 /* AddLocationViewController.swift */,
+				B82D340D2166808F0091CF96 /* ConfirmLocationViewController.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -331,9 +337,11 @@
 				B823898D2129E3FC00E7A7A9 /* NetworkController.swift in Sources */,
 				B827751F213EF37F0029A788 /* StudentTags.swift in Sources */,
 				B823898F2129E41B00E7A7A9 /* NetworkConstants.swift in Sources */,
+				B82D340E2166808F0091CF96 /* ConfirmLocationViewController.swift in Sources */,
 				B823895D2129A5CD00E7A7A9 /* ViewController.swift in Sources */,
 				B81682BB213C18E800DE4364 /* ActivityIndicatorView.swift in Sources */,
 				B871A876213DA2D3004E4600 /* MapViewController.swift in Sources */,
+				B82D340C216680650091CF96 /* AddLocationViewController.swift in Sources */,
 				B81682B7213C057700DE4364 /* UserSession.swift in Sources */,
 				B8885AD52133169400095176 /* OTMClient.swift in Sources */,
 				B871A878213DA306004E4600 /* TagListViewController.swift in Sources */,

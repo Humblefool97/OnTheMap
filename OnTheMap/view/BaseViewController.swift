@@ -49,8 +49,16 @@ class BaseViewController:UIViewController{
             performUIUpdatesOnMain {
                 UIViewController.removeLoader(view: loadingIndicator)
             }
-           self.checkStudentLocation()
+            self.checkStudentLocation()
         }
+    }
+    
+    fileprivate func displayAddLocationVc() {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let navigationController = storyBoard.instantiateViewController(withIdentifier: "AddLocationRootViewController") as! UINavigationController
+//        let viewController = storyBoard.instantiateViewController(withIdentifier: "AddLocationVc") as! AddLocationViewController
+//        navigationController.pushViewController(viewController, animated: true)
+        self.present(navigationController, animated: true, completion: nil)
     }
     
     func checkStudentLocation(){
@@ -68,7 +76,7 @@ class BaseViewController:UIViewController{
                     }
                 }
             }else{
-                //Display VC to add location
+                self.displayAddLocationVc()
             }
             performUIUpdatesOnMain {
                 UIViewController.removeLoader(view:loadingIndicator)
@@ -81,6 +89,7 @@ class BaseViewController:UIViewController{
             let alert = UIAlertController(title: "Overwrite?", message: "User location already exists.Do you want to overwrite it?", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil))
             alert.addAction(UIAlertAction(title: "Overwrite", style: UIAlertActionStyle.default){ action in
+                self.displayAddLocationVc()
             })
             self.present(alert, animated: true, completion: nil)
         }
