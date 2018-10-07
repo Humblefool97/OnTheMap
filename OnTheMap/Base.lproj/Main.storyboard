@@ -218,7 +218,7 @@
             </objects>
             <point key="canvasLocation" x="3652" y="461"/>
         </scene>
-        <!--Location & Media-->
+        <!--Add Location-->
         <scene sceneID="cmr-Mc-NC2">
             <objects>
                 <viewController storyboardIdentifier="AddLocationVc" id="v7Y-z4-98M" customClass="AddLocationViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
@@ -242,13 +242,13 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ex: http://ufc.com" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iag-HL-c21">
-                                <rect key="frame" x="60" y="293" width="294" height="30"/>
+                                <rect key="frame" x="60" y="307" width="294" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E4L-Hu-Nfd">
-                                <rect key="frame" x="172" y="409" width="70" height="30"/>
+                                <rect key="frame" x="172" y="423" width="70" height="30"/>
                                 <color key="backgroundColor" red="0.81012135744094849" green="0.016313726082444191" blue="0.97548586130142212" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="70" id="AoZ-DX-Y4G"/>
@@ -269,7 +269,7 @@
                             <constraint firstItem="aDd-D6-gMU" firstAttribute="trailing" secondItem="iag-HL-c21" secondAttribute="trailing" constant="60" id="A4r-Ao-Mkt"/>
                             <constraint firstItem="E4L-Hu-Nfd" firstAttribute="centerX" secondItem="WuW-Cf-GUT" secondAttribute="centerX" id="E34-Ad-hRB"/>
                             <constraint firstItem="aDd-D6-gMU" firstAttribute="trailing" secondItem="jcn-rt-XRL" secondAttribute="trailing" constant="60" id="N0m-Yn-mPv"/>
-                            <constraint firstItem="iag-HL-c21" firstAttribute="top" secondItem="jcn-rt-XRL" secondAttribute="bottom" constant="18" id="Ohw-5f-MAQ"/>
+                            <constraint firstItem="iag-HL-c21" firstAttribute="top" secondItem="jcn-rt-XRL" secondAttribute="bottom" constant="32" id="Ohw-5f-MAQ"/>
                             <constraint firstItem="LCp-rJ-2qk" firstAttribute="centerY" secondItem="WuW-Cf-GUT" secondAttribute="centerY" multiplier="0.5" constant="1" id="ScT-e4-Zuk"/>
                             <constraint firstItem="LCp-rJ-2qk" firstAttribute="centerX" secondItem="WuW-Cf-GUT" secondAttribute="centerX" id="aDb-ON-6LZ"/>
                             <constraint firstItem="E4L-Hu-Nfd" firstAttribute="top" secondItem="iag-HL-c21" secondAttribute="bottom" constant="86" id="iRz-KH-ER1"/>
@@ -278,7 +278,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aDd-D6-gMU"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Location &amp; Media" id="Ig7-kB-u5I">
+                    <navigationItem key="navigationItem" title="Add Location" id="Ig7-kB-u5I">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="x6h-Cp-ogE">
                             <connections>
                                 <action selector="onCancelClicked:" destination="v7Y-z4-98M" id="GVu-XH-JeC"/>
@@ -286,6 +286,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="locationTextField" destination="jcn-rt-XRL" id="ieI-uf-Zn5"/>
+                        <outlet property="mediaTextField" destination="iag-HL-c21" id="509-eg-OLE"/>
                         <outlet property="submitButton" destination="E4L-Hu-Nfd" id="EfY-2A-Hux"/>
                     </connections>
                 </viewController>

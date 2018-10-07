@@ -10,18 +10,50 @@ import UIKit
 
 class AddLocationViewController: UIViewController {
     
+    @IBOutlet weak var locationTextField: UITextField!
     
+    @IBOutlet weak var mediaTextField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initButton()
     }
     
     @IBAction func onSubmitClickef(_ sender: UIButton) {
+        if((locationTextField.text?.isEmpty)! && (mediaTextField.text?.isEmpty)!){
+            displayErrorMessage("Please enter location & media url")
+        }else if (locationTextField.text?.isEmpty)!{
+            displayErrorMessage("Please enter location")
+        }else if (mediaTextField.text?.isEmpty)!{
+            displayErrorMessage("Enter media url")
+        }else{
+            if(!(mediaTextField?.text)!.starts(with: "http://")){
+                displayErrorMessage("url should start with http://")
+            }else{
+                presentConfirmLocationVc((mediaTextField?.text)!,(locationTextField?.text)!)
+            }
+        }
+    }
+    
+    private func presentConfirmLocationVc(_ mediaUrl:String ,
+                                          _ location:String){
+        if let confirmLocationViewController:ConfirmLocationViewController = storyboard?.instantiateViewController(withIdentifier: "ConfirmLocationVc") as? ConfirmLocationViewController{
+            confirmLocationViewController.selectedLocation = location
+            confirmLocationViewController.mediaUrl = mediaUrl
+            let navigationController = storyboard?.instantiateViewController(withIdentifier: "AddLocationRootViewController") as! UINavigationController
+            navigationController.pushViewController(confirmLocationViewController, animated: true)
+        }
+        
     }
     @IBAction func onCancelClicked(_ sender: Any) {
         self.dismiss(animated: true, completion:nil)
-        //  self.navigationController?.popViewController(animated: true)
+    }
+    
+    func displayErrorMessage(_ errorMessage:String?) {
+        let alert = UIAlertController(title: "Add location", message: errorMessage, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     fileprivate func initButton(){
         submitButton.layer.cornerRadius = 10
