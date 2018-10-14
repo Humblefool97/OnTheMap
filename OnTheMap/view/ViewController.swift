@@ -58,6 +58,10 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func onSignupClick(_ sender: Any) {
+        let url = URL(string: "https://auth.udacity.com/sign-up")
+        UIApplication.shared.open(url!, options: [:], completionHandler:nil)
+    }
     
 }
 
