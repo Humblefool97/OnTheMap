@@ -23,6 +23,13 @@ class MapViewController: BaseViewController, MKMapViewDelegate,DataCompletionLis
     @IBAction func onAddLocationClicked(_ sender: Any) {
         addLocation()
     }
+    @IBAction func onLogOutClick(_ sender: Any) {
+        logOut()
+    }
+    
+    @IBAction func onRefreshClick(_ sender: Any) {
+        refresh()
+    }
     
     // MARK: - MKMapViewDelegate
     

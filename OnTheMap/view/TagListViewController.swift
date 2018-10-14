@@ -9,7 +9,7 @@
 import UIKit
 
 class TagListViewController:BaseViewController,UITableViewDelegate,UITableViewDataSource,DataCompletionListener{
-   
+    
     let appDelegate:AppDelegate = (UIApplication.shared.delegate as! AppDelegate)
     
     @IBOutlet var studentListTableView: UITableView!
@@ -30,6 +30,9 @@ class TagListViewController:BaseViewController,UITableViewDelegate,UITableViewDa
         super.viewDidLoad()
         studentListTableView.delegate = self 
         studentListTableView.dataSource = self
+    }
+    @IBAction func onLogOutClick(_ sender: Any) {
+        logOut()
     }
     //MARK:- Tableview delegates
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -58,9 +61,9 @@ class TagListViewController:BaseViewController,UITableViewDelegate,UITableViewDa
         displayErrorMessage(errorString)
     }
     
-
-    
-    
+    @IBAction func onRefreshClick(_ sender: Any) {
+        refresh()
+    }
     /*
      // MARK: - Navigation
      

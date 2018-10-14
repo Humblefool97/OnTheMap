@@ -110,4 +110,25 @@ class BaseViewController:UIViewController{
         }
     }
     
+    func logOut(){
+        let loadingIndicator = UIViewController.displayLoadingIndicator(view: self.view)
+        NetworkController.init().instance().delete{
+            isSuccess,errorString in
+            if(isSuccess){
+                performUIUpdatesOnMain {
+                    UIViewController.removeLoader(view:loadingIndicator)
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }else{
+                performUIUpdatesOnMain {
+                    UIViewController.removeLoader(view:loadingIndicator)
+                    self.displayErrorMessage("Something went wrong!!")
+                }
+            }
+        }
+    }
+    
+    func refresh(){
+        getStudents()
+    }
 }

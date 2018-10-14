@@ -183,14 +183,22 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="On the Map" id="aKB-bd-f85">
-                        <barButtonItem key="leftBarButtonItem" title="LOGOUT" id="6zZ-Dr-gx9"/>
+                        <barButtonItem key="leftBarButtonItem" title="LOGOUT" id="6zZ-Dr-gx9">
+                            <connections>
+                                <action selector="onLogOutClick:" destination="tHe-ws-n4M" id="LxQ-LZ-bay"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem title="Item" image="icon_addpin" id="rA1-cf-qzk">
                                 <connections>
                                     <action selector="onAddLocation:" destination="tHe-ws-n4M" id="DdE-mm-S7C"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Item" image="icon_refresh" id="na0-Ux-NPb"/>
+                            <barButtonItem title="Item" image="icon_refresh" id="na0-Ux-NPb">
+                                <connections>
+                                    <action selector="onRefreshClick:" destination="tHe-ws-n4M" id="1sK-XF-IqB"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
@@ -381,14 +389,22 @@
                         <viewLayoutGuide key="safeArea" id="bNe-QJ-TRW"/>
                     </view>
                     <navigationItem key="navigationItem" title="On the Map" id="Nsd-br-2vk">
-                        <barButtonItem key="leftBarButtonItem" title="LOGOUT" id="VUf-am-7Fa"/>
+                        <barButtonItem key="leftBarButtonItem" title="LOGOUT" id="VUf-am-7Fa">
+                            <connections>
+                                <action selector="onLogOutClick:" destination="sdd-l4-Ka5" id="do7-Ld-v8o"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem title="Item" image="icon_addpin" id="ESA-7d-S7m">
                                 <connections>
                                     <action selector="onAddLocationClicked:" destination="sdd-l4-Ka5" id="wdE-PH-LGS"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Item" image="icon_refresh" id="3gY-Ik-Ieu"/>
+                            <barButtonItem title="Item" image="icon_refresh" id="3gY-Ik-Ieu">
+                                <connections>
+                                    <action selector="onRefreshClick:" destination="sdd-l4-Ka5" id="vFa-pa-xcg"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>

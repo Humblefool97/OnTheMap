@@ -87,6 +87,8 @@ class NetworkController:NSObject {
         task.resume()
     }
     
+    
+    
     // given raw JSON, return a usable Foundation object
     private func convertDataWithCompletionHandler(_ data: Data,isAuthRequest:Bool,completionHandlerForConvertData: (_ result: AnyObject?, _ error: NSError?) -> Void,isBasicInfoCall:Bool = false) {
         var newData = data
@@ -104,6 +106,30 @@ class NetworkController:NSObject {
         completionHandlerForConvertData(parsedResult, nil)
     }
     
+    func delete(completionHandler: @escaping ( _ isSuccess:Bool, _ error:NSError?) -> Void) -> Void{
+        var request = URLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
+        request.httpMethod = "DELETE"
+        var xsrfCookie: HTTPCookie? = nil
+        let sharedCookieStorage = HTTPCookieStorage.shared
+        for cookie in sharedCookieStorage.cookies! {
+            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+        }
+        if let xsrfCookie = xsrfCookie {
+            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+        }
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { data, response, error in
+            if error != nil { // Handle error…
+                completionHandler(false,nil)
+                return
+            }
+            let range = Range(5..<data!.count)
+            let newData = data?.subdata(in: range) /* subset response data! */
+            print(String(data: newData!, encoding: .utf8)!)
+            completionHandler(true,nil)
+        }
+        task.resume()
+    }
     private func getUrlFromParameters (_ parameters: [String:AnyObject], withPathExtension:String? = nil) -> URL{
         var components = URLComponents()
         components.scheme = NetworkController.Constants.ApiScheme
