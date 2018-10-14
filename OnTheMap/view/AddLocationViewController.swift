@@ -38,14 +38,14 @@ class AddLocationViewController: UIViewController {
     
     private func presentConfirmLocationVc(_ mediaUrl:String ,
                                           _ location:String){
-        if let confirmLocationViewController:ConfirmLocationViewController = storyboard?.instantiateViewController(withIdentifier: "ConfirmLocationVc") as? ConfirmLocationViewController{
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        if let confirmLocationViewController:ConfirmLocationViewController = storyBoard.instantiateViewController(withIdentifier: "ConfirmLocationVc") as? ConfirmLocationViewController{
             confirmLocationViewController.selectedLocation = location
             confirmLocationViewController.mediaUrl = mediaUrl
-            let navigationController = storyboard?.instantiateViewController(withIdentifier: "AddLocationRootViewController") as! UINavigationController
-            navigationController.pushViewController(confirmLocationViewController, animated: true)
+            navigationController?.pushViewController(confirmLocationViewController, animated: true)
         }
-        
     }
+    
     @IBAction func onCancelClicked(_ sender: Any) {
         self.dismiss(animated: true, completion:nil)
     }
@@ -59,16 +59,5 @@ class AddLocationViewController: UIViewController {
         submitButton.layer.cornerRadius = 10
         submitButton.clipsToBounds = true
     }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }

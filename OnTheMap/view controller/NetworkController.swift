@@ -17,13 +17,22 @@ class NetworkController:NSObject {
         case POST
         case PUT
     }
-    func  fireNetworkCall ( httpMethod:httpMethods,isAuthRequest:Bool = false,_ method:String , parameters: [String:AnyObject] = [:], jsonObject:[String:AnyObject]?,completionHandler: @escaping ( _ result: AnyObject?, _ error:NSError?) -> Void) -> Void {
+    func  fireNetworkCall ( httpMethod       : httpMethods,
+                            isAuthRequest    : Bool = false,
+                            _ method         : String ,
+                            parameters       : [String:AnyObject] = [:],
+                            jsonObject       : [String:AnyObject]?,
+                            isBasicInfoCall  : Bool = false,
+                            userId           : String = "",
+                            completionHandler: @escaping ( _ result: AnyObject?, _ error:NSError?) -> Void) -> Void {
         /* 1. Set the parameters */
         
         /* 2/3. Build the URL, Configure the request */
         var url:URL?
         if(isAuthRequest){
             url = URL(string: NetworkController.Constants.AuthorizationURL)
+        }else if(isBasicInfoCall){
+            url = URL(string: NetworkController.Constants.basicInfoURL+"/\(userId)")
         }else{
             url = getUrlFromParameters(parameters,withPathExtension: method)
         }
@@ -71,7 +80,7 @@ class NetworkController:NSObject {
                 return
             }
             
-            self.convertDataWithCompletionHandler(data,isAuthRequest: isAuthRequest,completionHandlerForConvertData: completionHandler)
+            self.convertDataWithCompletionHandler(data,isAuthRequest: isAuthRequest,completionHandlerForConvertData: completionHandler,isBasicInfoCall: isBasicInfoCall)
         }
         
         /* 5. Start the task*/
@@ -79,9 +88,9 @@ class NetworkController:NSObject {
     }
     
     // given raw JSON, return a usable Foundation object
-    private func convertDataWithCompletionHandler(_ data: Data,isAuthRequest:Bool,completionHandlerForConvertData: (_ result: AnyObject?, _ error: NSError?) -> Void) {
+    private func convertDataWithCompletionHandler(_ data: Data,isAuthRequest:Bool,completionHandlerForConvertData: (_ result: AnyObject?, _ error: NSError?) -> Void,isBasicInfoCall:Bool = false) {
         var newData = data
-        if(isAuthRequest){
+        if(isAuthRequest || isBasicInfoCall){
             let range = Range(5..<data.count)
             newData = data.subdata(in: range)
         }

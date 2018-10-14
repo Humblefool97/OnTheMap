@@ -30,6 +30,7 @@ extension NetworkController {
         static let ApiHost = "parse.udacity.com"
         static let ApiPath = "/parse/classes"
         static let AuthorizationURL = "https://www.udacity.com/api/session"
+        static let basicInfoURL = " https://www.udacity.com/api/users"
         
         //MARK:PARAMS
         static let WHERE = "where"

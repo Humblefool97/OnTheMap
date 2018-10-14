@@ -56,21 +56,20 @@ class BaseViewController:UIViewController{
     fileprivate func displayAddLocationVc() {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let navigationController = storyBoard.instantiateViewController(withIdentifier: "AddLocationRootViewController") as! UINavigationController
-//        let viewController = storyBoard.instantiateViewController(withIdentifier: "AddLocationVc") as! AddLocationViewController
-//        navigationController.pushViewController(viewController, animated: true)
         self.present(navigationController, animated: true, completion: nil)
     }
     
     func checkStudentLocation(){
         let loadingIndicator = UIViewController.displayLoadingIndicator(view: self.view)
-        NetworkController.init().instance().getStudent(uniqueKey:  UserSession.instance.accountKey!){
-            (isSuccess,isStudentLocationExists,errorString) in
+        NetworkController.init().instance().doesRecordExists(uniqueKey:  UserSession.instance.accountKey!){
+            (isSuccess,isStudentLocationExists,studentInfo,errorString) in
             if(isSuccess){
                 //Display dialog
                 performUIUpdatesOnMain {
                     if(isStudentLocationExists){
                         print("Student Record already exists")
                         UserSession.instance.doesUserExist = true
+                        UserSession.instance.studentInfo = studentInfo!
                     }else{
                         print("Student Record doesn't exists")
                     }
@@ -80,6 +79,22 @@ class BaseViewController:UIViewController{
             }
             performUIUpdatesOnMain {
                 UIViewController.removeLoader(view:loadingIndicator)
+            }
+        }
+    }
+    
+    func fetchBasicStudentInfo(){
+        let loadingIndicator = UIViewController.displayLoadingIndicator(view: self.view)
+        NetworkController.init().instance().getBasicInformation(userId: UserSession.instance.accountKey!){isSuccess,studentInfo,errorString in
+            if isSuccess{
+                if let studentInfo = studentInfo{
+                    UserSession.instance.studentInfo = studentInfo
+                }
+                return
+            }
+            performUIUpdatesOnMain {
+                UIViewController.removeLoader(view:loadingIndicator)
+                self.displayErrorMessage("Not able to fetch basic info")
             }
         }
     }

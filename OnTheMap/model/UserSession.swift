@@ -12,6 +12,7 @@ class UserSession {
     public var accountKey:String? = ""
     public var sessionId:String? = ""
     public var doesUserExist:Bool = false
+    public var studentInfo:StudentTags = StudentTags()
     public static let instance = UserSession()
     private init () {}
 }
