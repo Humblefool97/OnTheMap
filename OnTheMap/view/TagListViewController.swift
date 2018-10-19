@@ -47,8 +47,15 @@ class TagListViewController:BaseViewController,UITableViewDelegate,UITableViewDa
         return tableViewCell!
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let studentInfo = appDelegate.studentTagsList[indexPath.row]
+        let url = studentInfo.mediaUrl
+        if(!url.isEmpty){
+            UIApplication.shared.open(URL(string: url)!, options:[:], completionHandler: nil)
+        }
+    }
     //MARK:- Dataload callbacks
-    func onDataLoadSuccess(studentList: [StudentTags]?) {
+    func onDataLoadSuccess(studentList: [StudentInformation]?) {
         if let studentList = studentList{
             performUIUpdatesOnMain {
                 self.appDelegate.studentTagsList = studentList
@@ -64,14 +71,5 @@ class TagListViewController:BaseViewController,UITableViewDelegate,UITableViewDa
     @IBAction func onRefreshClick(_ sender: Any) {
         refresh()
     }
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }

@@ -7,7 +7,10 @@
 //
 
 import Foundation
+/**
+ *  Contract to send the data to VC
+ */
 protocol DataCompletionListener {
-    func onDataLoadSuccess(studentList:[StudentTags]?)
+    func onDataLoadSuccess(studentList:[StudentInformation]?)
     func onDataLoadFailure(errorString:String?)
 }

@@ -31,9 +31,30 @@ extension NetworkController {
         static let ApiPath = "/parse/classes"
         static let AuthorizationURL = "https://www.udacity.com/api/session"
         static let basicInfoURL = " https://www.udacity.com/api/users"
+        static let ApiPathStudentLocation = "/StudentLocation"
         
         //MARK:PARAMS
         static let WHERE = "where"
+        //MARK:PAYLOAD KEYS
+        static let KEY_ROOT_LOGIN = "udacity"
+        static let KEY_LOGIN_USERNAME = "username"
+        static let KEY_LOGIN_PASSWORD = "password"
+        //MARK:RESPONSE KEYS
+        static let KEY_ACCOUNT = "account"
+        static let KEY_SESSION = "session"
+        static let KEY_ID = "id"
+        static let KEY_KEY = "key"
+        static let KEY_RESULTS = "results"
+        static let KEY_UNIQUE_KEY = "uniqueKey"
+        static let KEY_FIRST_NAME = "firstName"
+        static let KEY_LAST_NAME = "lastName"
+        static let KEY_MEDIA_URL = "mediaURL"
+        static let KEY_MAP_STRING = "mapString"
+        static let KEY_LATITUDE = "latitude"
+        static let KEY_LONGITUDE = "longitude"
+        static let KEY_BASIC_INFO_ROOT = "user"
+        static let KEY_BASIC_INFO_FIRST_NAME = "first_name"
+        static let KEY_BASIC_INFO_LAST_NAME = "last_name"
     }
     
     //MARK : Methods

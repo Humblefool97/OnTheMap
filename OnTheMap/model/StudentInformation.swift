@@ -8,7 +8,11 @@
 
 import Foundation
 import MapKit
-class StudentTags {
+
+/**
+ *  Student POJO
+ */
+class StudentInformation {
     var objectId:String = ""
     var uniqueKey:String = ""
     var firstName:String = ""

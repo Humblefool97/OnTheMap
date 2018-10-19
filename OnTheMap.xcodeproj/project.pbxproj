@@ -21,7 +21,7 @@
 		B823898D2129E3FC00E7A7A9 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823898C2129E3FC00E7A7A9 /* NetworkController.swift */; };
 		B823898F2129E41B00E7A7A9 /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823898E2129E41B00E7A7A9 /* NetworkConstants.swift */; };
 		B82389912129E6B700E7A7A9 /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82389902129E6B700E7A7A9 /* GCDBlackBox.swift */; };
-		B827751F213EF37F0029A788 /* StudentTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = B827751E213EF37F0029A788 /* StudentTags.swift */; };
+		B827751F213EF37F0029A788 /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B827751E213EF37F0029A788 /* StudentInformation.swift */; };
 		B82D340C216680650091CF96 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82D340B216680650091CF96 /* AddLocationViewController.swift */; };
 		B82D340E2166808F0091CF96 /* ConfirmLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82D340D2166808F0091CF96 /* ConfirmLocationViewController.swift */; };
 		B871A876213DA2D3004E4600 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B871A875213DA2D3004E4600 /* MapViewController.swift */; };
@@ -68,7 +68,7 @@
 		B823898C2129E3FC00E7A7A9 /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		B823898E2129E41B00E7A7A9 /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
 		B82389902129E6B700E7A7A9 /* GCDBlackBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
-		B827751E213EF37F0029A788 /* StudentTags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentTags.swift; sourceTree = "<group>"; };
+		B827751E213EF37F0029A788 /* StudentInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
 		B82D340B216680650091CF96 /* AddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
 		B82D340D2166808F0091CF96 /* ConfirmLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmLocationViewController.swift; sourceTree = "<group>"; };
 		B871A875213DA2D3004E4600 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -186,7 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				B81682B6213C057700DE4364 /* UserSession.swift */,
-				B827751E213EF37F0029A788 /* StudentTags.swift */,
+				B827751E213EF37F0029A788 /* StudentInformation.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -335,7 +335,7 @@
 			files = (
 				B81E821A21458579009CEA4E /* BaseViewController.swift in Sources */,
 				B823898D2129E3FC00E7A7A9 /* NetworkController.swift in Sources */,
-				B827751F213EF37F0029A788 /* StudentTags.swift in Sources */,
+				B827751F213EF37F0029A788 /* StudentInformation.swift in Sources */,
 				B823898F2129E41B00E7A7A9 /* NetworkConstants.swift in Sources */,
 				B82D340E2166808F0091CF96 /* ConfirmLocationViewController.swift in Sources */,
 				B823895D2129A5CD00E7A7A9 /* ViewController.swift in Sources */,
