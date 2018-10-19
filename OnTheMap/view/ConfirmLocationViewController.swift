@@ -43,7 +43,6 @@ class ConfirmLocationViewController: UIViewController,MKMapViewDelegate {
                     return
                 }
                 let locationPlacemark = placemarks[0]
-                // Here we create the annotation and set its coordiate, title, and subtitle properties
                 let annotation = MKPointAnnotation()
                 self.confirmLocationCoordinates = (locationPlacemark.location?.coordinate)!
                 annotation.coordinate = self.confirmLocationCoordinates
