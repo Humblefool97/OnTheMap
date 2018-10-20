@@ -60,39 +60,10 @@ extension NetworkController {
                 print(result as Any)
                 if let json = result as? [String:Any]{
                     if let locations = json[Constants.KEY_RESULTS] as? [[String:Any]]{
-                        // Notice that the float values are being used to create CLLocationDegree values.
-                        // This is a version of the Double type.
                         var studentTags:[StudentInformation] = [StudentInformation]()
                         for dictionary in locations{
-                            var isValidCell = false
-                            let studentTag = StudentInformation()
-                            if let first =  dictionary[Constants.KEY_FIRST_NAME]{
-                                let firstNameAsString = (first as! String)
-                                if(firstNameAsString.isEmpty){
-                                    continue
-                                }
-                                studentTag.firstName  = firstNameAsString
-                                isValidCell = true
-                            }
-                            
-                            if  let last = dictionary[Constants.KEY_LAST_NAME]{
-                                studentTag.lastName = last as! String
-                                isValidCell = true
-                            }
-                            if let mediaURL = dictionary[Constants.KEY_MEDIA_URL]{
-                                studentTag.mediaUrl = mediaURL as! String
-                                isValidCell = true
-                            }
-                            if let lat = (dictionary[Constants.KEY_LATITUDE]), let long = (dictionary[Constants.KEY_LONGITUDE]){
-                                let latInDouble = lat as! Double
-                                let longInDouble = long as! Double
-                                
-                                let coordinate = CLLocationCoordinate2D(latitude: latInDouble, longitude: longInDouble)
-                                // The lat and long are used to create a CLLocationCoordinates2D instance.
-                                studentTag.coordinate = coordinate
-                                isValidCell = true
-                            }
-                            if(isValidCell){
+                            let studentTag = StudentInformation(withDictionary: dictionary)
+                            if(studentTag.hasValidInfo){
                                 studentTags.append(studentTag)
                             }
                         }
@@ -114,7 +85,7 @@ extension NetworkController {
         _ isLocationExists:Bool,
         _ studentInfo:StudentInformation?,
         _ errorString:String?) ->  Void) -> Void{
-        
+         
         let paramter = [NetworkController.Constants.WHERE:"{\"uniqueKey\":\"\(uniqueKey)\"}"]
         let _ = fireNetworkCall(httpMethod:httpMethods.GET, isAuthRequest: false, "/StudentLocation", parameters: paramter as [String:AnyObject], jsonObject: nil){
             (result,error) in
@@ -122,8 +93,10 @@ extension NetworkController {
                 completionHandlerForStudent(false,false,nil,error.description)
             }else{
                 if let json = result as? [String:Any]{
-                    if let studentList = json[Constants.KEY_RESULTS] as? [[String:Any]]{
-                        completionHandlerForStudent(true,!studentList.isEmpty,self.processDictionary(studentList: studentList),"")
+                    if let studentList = json[Constants.KEY_RESULTS] as? [[String:Any]], studentList[0].isEmpty == false{
+                        completionHandlerForStudent(true,true,self.processDictionary(studentList: studentList),"")
+                    }else{
+                        completionHandlerForStudent(true,false,nil,"")
                     }
                 }
             }
@@ -146,9 +119,7 @@ extension NetworkController {
             }else{
                 if let json = result as? [String:Any]{
                     if let studentInfo = json[Constants.KEY_BASIC_INFO_ROOT] as? [String:Any]{
-                        let student = StudentInformation()
-                        student.firstName = studentInfo[Constants.KEY_BASIC_INFO_FIRST_NAME] as! String
-                        student.lastName = studentInfo[Constants.KEY_BASIC_INFO_LAST_NAME] as! String
+                        let student = StudentInformation(withDictionary: studentInfo)
                         completionHandlerForStudent(true,student,nil)
                     }
                 }
@@ -185,32 +156,7 @@ extension NetworkController {
      *
      */
     private func processDictionary(studentList:[[String:Any]])-> StudentInformation{
-        let studentTag = StudentInformation()
-        for dictionary in studentList{
-            if let first =  dictionary[Constants.KEY_FIRST_NAME]{
-                let firstNameAsString = (first as! String)
-                if(firstNameAsString.isEmpty){
-                    continue
-                }
-                studentTag.firstName  = firstNameAsString
-            }
-            
-            if  let last = dictionary[Constants.KEY_LAST_NAME]{
-                studentTag.lastName = last as! String
-            }
-            if let mediaURL = dictionary[Constants.KEY_MEDIA_URL]{
-                studentTag.mediaUrl = mediaURL as! String
-            }
-            if let lat = (dictionary[Constants.KEY_LATITUDE]), let long = (dictionary[Constants.KEY_LONGITUDE]){
-                let latInDouble = lat as! Double
-                let longInDouble = long as! Double
-                
-                let coordinate = CLLocationCoordinate2D(latitude: latInDouble, longitude: longInDouble)
-                // The lat and long are used to create a CLLocationCoordinates2D instance.
-                studentTag.coordinate = coordinate
-            }
-        }
-        return studentTag
+       return StudentInformation(withDictionary: studentList[0])
     }
     
 }

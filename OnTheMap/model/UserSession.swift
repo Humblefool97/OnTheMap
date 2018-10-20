@@ -16,7 +16,7 @@ class UserSession {
     public var accountKey:String? = ""
     public var sessionId:String? = ""
     public var doesUserExist:Bool = false
-    public var studentInfo:StudentInformation = StudentInformation()
+    public var studentInfo:StudentInformation? = nil
     public static let instance = UserSession()
     private init () {}
 }

@@ -11,12 +11,12 @@ import Foundation
 import MapKit
 
 class ConfirmLocationViewController: UIViewController,MKMapViewDelegate {
-    
     @IBOutlet weak var confirmButton: UIButton!
     var selectedLocation:String = ""
     var mediaUrl:String = ""
     @IBOutlet weak var mapView: MKMapView!
     var confirmLocationCoordinates:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,14 +32,17 @@ class ConfirmLocationViewController: UIViewController,MKMapViewDelegate {
     
     fileprivate func loadLocation() {
         let geoCoder = CLGeocoder()
+        showActivityIndicatory(uiView: self.view)
         geoCoder.geocodeAddressString(selectedLocation){(placemarks: [CLPlacemark]?, error: Error?) in
             if error != nil {
                 self.displayErrorMessage("Error in finding location")
+                self.activityIndicator.stopAnimating()
                 return
             }
             if let placemarks = placemarks {
                 if placemarks.count == 0 {
-                    self.displayErrorMessage("Could not find location!")
+                    self.displayErrorMessage("Error in finding location")
+                    self.activityIndicator.stopAnimating()
                     return
                 }
                 let locationPlacemark = placemarks[0]
@@ -50,31 +53,33 @@ class ConfirmLocationViewController: UIViewController,MKMapViewDelegate {
                 let distance = CLLocationDistance(5000.0)
                 let region = MKCoordinateRegionMakeWithDistance(self.confirmLocationCoordinates, distance, distance)
                 self.mapView.setRegion(region, animated: true)
+                self.activityIndicator.stopAnimating()
             }
         }
     }
     
     @IBAction func onConfirmClicked(_ sender: UIButton) {
         let studentInfo = UserSession.instance.studentInfo
-        studentInfo.mapString = selectedLocation
-        studentInfo.mediaUrl = mediaUrl
-        studentInfo.latitude = confirmLocationCoordinates.latitude
-        studentInfo.longitude = confirmLocationCoordinates.longitude
-        let loadingIndicator = UIViewController.displayLoadingIndicator(view: self.view)
-        NetworkController.init().instance().postStudentLocation(studentInfo: studentInfo){
-            isSuccess,errorString in
-            if(!isSuccess){
-                performUIUpdatesOnMain {
-                    UIViewController.removeLoader(view:loadingIndicator)
-                    self.displayErrorMessage("Something went wrong!!")
-                }
-            }else{
-                performUIUpdatesOnMain {
-                    self.dismiss(animated: true, completion: nil)
+        if(studentInfo != nil){
+            studentInfo?.mapString = selectedLocation
+            studentInfo?.mediaUrl = mediaUrl
+            studentInfo?.latitude = confirmLocationCoordinates.latitude
+            studentInfo?.longitude = confirmLocationCoordinates.longitude
+            let loadingIndicator = UIViewController.displayLoadingIndicator(view: self.view)
+            NetworkController.init().instance().postStudentLocation(studentInfo: studentInfo!){
+                isSuccess,errorString in
+                if(!isSuccess){
+                    performUIUpdatesOnMain {
+                        UIViewController.removeLoader(view:loadingIndicator)
+                        self.displayErrorMessage("Something went wrong!!")
+                    }
+                }else{
+                    performUIUpdatesOnMain {
+                        self.dismiss(animated: true, completion: nil)
+                    }
                 }
             }
         }
-        
     }
     
     func displayErrorMessage(_ errorMessage:String?) {
@@ -100,6 +105,16 @@ class ConfirmLocationViewController: UIViewController,MKMapViewDelegate {
         }
         
         return pinView
+    }
+    
+    func showActivityIndicatory(uiView: UIView) {
+        activityIndicator.frame = CGRect(x: 0.0, y: 0.0, width:40.0, height: 40.0)
+        activityIndicator.center = uiView.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle =
+            UIActivityIndicatorViewStyle.whiteLarge
+        uiView.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
     }
     
 }
